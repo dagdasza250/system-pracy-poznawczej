@@ -1,0 +1,25 @@
+{
+  "releaseName": "SPP v0.5.1 Experimental Release Baseline",
+  "programPhase": "R0",
+  "gateStatus": "TECHNICAL_ARTIFACTS_VERIFIED — REAL_LOCALSTORAGE_AND_INDEPENDENT_SIGNOFF_PENDING",
+  "sourceBundleTag": "v0.5.1-experimental-baseline",
+  "sourceBundleCommit": "c9f48db90506e0fc0fb9082e598ab0b3ef364d32",
+  "createdAt": "2026-08-06T22:42:00+02:00",
+  "appVersion": "0.5.1",
+  "schemaVersion": "0.5.1",
+  "localStorageKey": "spp-v051-frozen-validation-2026-08-06",
+  "snapshotSha256": "1a1afba028e5f306a476a4b2d2772e13a6dc8390a240f51a23674ea37a0a709a",
+  "snapshotCounts": {
+    "sources": 1,
+    "episodes": 1,
+    "cases": 1,
+    "validationMaterials": 6,
+    "validationSessions": 6
+  },
+  "automatedBrowserVerification": true,
+  "automatedBrowserVerificationMode": "injected-document-clean-context-fallback",
+  "fullLocalStorageReproduction": false,
+  "independentHumanReproduction": "pending",
+  "noApiKey": true,
+  "githubImportNote": "GitHub commits created during documentation import are not the original sourceBundleCommit."
+}

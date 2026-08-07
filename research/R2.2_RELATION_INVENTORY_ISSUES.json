@@ -1,0 +1,26 @@
+{
+  "stage": "R2.2-A",
+  "title": "Relation Inventory",
+  "status": "DRAFT_FOR_REVIEW",
+  "baselineModified": false,
+  "sha256": "f0ee3b5ef24d5347c07adba751e94627b90ee82e2be1b6b13e3adb307ce7480a",
+  "coreCandidatesCount": 30,
+  "unresolvedBeforeCardinalities": [
+    {
+      "id": "R2.2-U01",
+      "field": "Relation.from/to",
+      "question": "Are endpoints Unit-only or polymorphic?"
+    },
+    {
+      "id": "R2.2-U02",
+      "field": "Fragment.contextBeforeIds/contextAfterIds",
+      "question": "What target type do these IDs reference?"
+    },
+    {
+      "id": "R2.2-U03",
+      "field": "Action.caseId",
+      "question": "Canonical ontology relation or redundant implementation backlink?"
+    }
+  ],
+  "next": "R2.2-A_REVIEW_GATE"
+}

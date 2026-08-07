@@ -1,26 +1,55 @@
 {
   "stage": "R2.2-A",
-  "title": "Relation Inventory",
-  "status": "DRAFT_FOR_REVIEW",
+  "title": "Relation Inventory Review Gate",
+  "status": "READY_FOR_SIGNOFF",
   "baselineModified": false,
-  "sha256": "f0ee3b5ef24d5347c07adba751e94627b90ee82e2be1b6b13e3adb307ce7480a",
-  "coreCandidatesCount": 30,
-  "unresolvedBeforeCardinalities": [
+  "candidateRelations": 30,
+  "relationsForR2_2_B": 27,
+  "resolved": [
     {
-      "id": "R2.2-U01",
+      "id": "U01",
       "field": "Relation.from/to",
-      "question": "Are endpoints Unit-only or polymorphic?"
+      "decision": "UNIT_ONLY",
+      "classification": "SEMANTIC_EDGE",
+      "blocking": false
     },
     {
-      "id": "R2.2-U02",
+      "id": "U02",
       "field": "Fragment.contextBeforeIds/contextAfterIds",
-      "question": "What target type do these IDs reference?"
+      "decision": "UNRESOLVED_SCHEMA_GAP",
+      "ownerSemantics": "R2.5",
+      "ownerConformance": "R2.7",
+      "includedInR2_2_B": false,
+      "blocking": false
     },
     {
-      "id": "R2.2-U03",
+      "id": "U03",
       "field": "Action.caseId",
-      "question": "Canonical ontology relation or redundant implementation backlink?"
+      "decision": "IMPLEMENTATION_REFERENCE_REDUNDANT_BACKLINK",
+      "canonicalMembership": "Case.actions[]",
+      "includedInR2_2_B": false,
+      "blocking": false
     }
   ],
-  "next": "R2.2-A_REVIEW_GATE"
+  "deferred": [
+    {
+      "issue": "Fragment context target semantics",
+      "owner": "R2.5",
+      "conformanceOwner": "R2.7"
+    },
+    {
+      "issue": "ModelVersion schema typing",
+      "owner": "R2.7"
+    },
+    {
+      "issue": "Result to ModelVersion lifecycle semantics",
+      "owner": "R2.6"
+    }
+  ],
+  "reviewReportSha256": "30e9cf120f2fffefd97ddf713634efaa5a2558d5ea7f4141993be8d2da17fcb9",
+  "relationInventoryRc1Sha256": "284caf5b1836cc5bbbcb4143bac0f868d96ff4ff3ac1d74b5e63bab10f2b46f8",
+  "gate": {
+    "status": "READY_FOR_SIGNOFF",
+    "recommendedDecision": "APPROVE & FREEZE R2.2-A"
+  }
 }

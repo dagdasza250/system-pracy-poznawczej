@@ -1,0 +1,35 @@
+{
+  "stage": "R2.2-A",
+  "title": "Relation Inventory Review Gate",
+  "version": "1.0",
+  "status": "CLOSED_FROZEN",
+  "decision": "APPROVE & FREEZE R2.2-A",
+  "approvedAt": "2026-08-07T11:09:00+02:00",
+  "approvedBy": "PROJECT_OWNER",
+  "authorizationBasis": "Owner instruction: sprawdź powyższe; jeżeli wszystko będzie dobrze idźmy dalej.",
+  "baseline": {
+    "tag": "v0.5.1-experimental-baseline",
+    "commit": "c9f48db90506e0fc0fb9082e598ab0b3ef364d32",
+    "modified": false
+  },
+  "sourceArtifacts": {
+    "reviewReportSha256": "30e9cf120f2fffefd97ddf713634efaa5a2558d5ea7f4141993be8d2da17fcb9",
+    "relationInventoryRc1Sha256": "284caf5b1836cc5bbbcb4143bac0f868d96ff4ff3ac1d74b5e63bab10f2b46f8"
+  },
+  "frozenArtifact": {
+    "file": "SPP_v0.5.1_R2.2_A_RELATION_INVENTORY_FROZEN.md",
+    "sha256": "b7893d88996a9b5e8db5455f3ba760daacb57d0ab0a9a40f3c22a46c9f157d98"
+  },
+  "frozenDecisions": {
+    "U01": "Relation.from/to endpoints are Unit-only in the minimal experimental ontology.",
+    "U02": "Fragment contextBeforeIds/contextAfterIds remain UNRESOLVED_SCHEMA_GAP; semantics R2.5, conformance R2.7; excluded from R2.2-B.",
+    "U03": "Action.caseId is implementation-only redundant backlink; canonical Case membership is Case.actions[].",
+    "candidateRelations": 30,
+    "relationsForR2_2_B": 27
+  },
+  "next": {
+    "id": "R2.2-B",
+    "title": "Cardinality & Integrity Contract",
+    "status": "UNLOCKED_CURRENT"
+  }
+}

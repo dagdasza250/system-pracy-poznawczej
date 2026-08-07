@@ -15,11 +15,11 @@
 | Pole | Stan |
 |---|---|
 | **CURRENT STAGE** | `R2 — Minimalna ontologia eksperymentalna` |
-| **CURRENT OPERATION** | `R2.2-B — Cardinality & Integrity Contract` |
-| **CURRENT STATUS** | `IN_PROGRESS` |
+| **CURRENT OPERATION** | `R2.2 — Relations & Cardinalities Final Signoff` |
+| **CURRENT STATUS** | `READY_FOR_SIGNOFF` |
 | **LAST FROZEN** | `R2.2-A — Relation Inventory` |
-| **NEXT ON PASS** | `R2.2 Review → APPROVE & FREEZE R2.2` |
-| **NEXT AFTER FROZEN R2.2** | `R2.3 — Epistemic Status Contract` |
+| **NEXT ON PASS** | `R2.3 — Epistemic Status Contract` |
+| **NEXT IF RETURN** | `R2.2-B — Cardinality & Integrity Contract` |
 
 | Etap | Status |
 |---|---|
@@ -27,7 +27,8 @@
 | R1 | `CLOSED / FROZEN` |
 | R2.1 | `CLOSED / FROZEN` |
 | R2.2-A | `CLOSED / FROZEN` |
-| **R2.2-B** | **`IN_PROGRESS`** |
+| R2.2-B | `READY_FOR_SIGNOFF` |
+| **R2.2** | **`READY_FOR_SIGNOFF`** |
 | R2.3+ | `LOCKED` |
 | R3–R6 / D0 | `LOCKED` |
 | Product / AI / Beta / PROD | `LOCKED` |
@@ -36,43 +37,50 @@
 
 ## 2. CURRENT OPERATION
 
-**R2.2-B — Cardinality & Integrity Contract**
+**R2.2 — Relations & Cardinalities Final Signoff**
 
 **OBJECTIVE**  
-Ustalić kardynalności, właściciela referencji i minimalne reguły integralności dla 27 relacji zamrożonych w R2.2-A.
+Podjąć formalną decyzję wobec ukończonego Review R2.2-B i RC1 całego kontraktu relacji, kardynalności oraz integralności.
 
-**QUESTION**  
-Dla każdej z 27 relacji: ile obiektów może/musi istnieć po obu stronach, kto przechowuje referencję, jaka integralność jest wymagana i co baseline faktycznie egzekwuje?
+**REVIEW RESULT**
+- `27/27` relacji ma strukturalną kardynalność, owner i regułę integralności;
+- `B01` → `SUPERSET_ALLOWED`;
+- `B02` → `SELF_LOOP_PROHIBITED`;
+- `B03` → `GLOBAL_STATE_UNIQUE`;
+- `B04` → `Result.actionId = SOURCE_OF_TRUTH`; `Action.resultIds = optional reverse index`;
+- brak blokujących issues;
+- baseline v0.5.1 pozostał niezmieniony.
 
-**ACTIVE OUTPUTS**
-- [`research/R2.2_B_CARDINALITY_INTEGRITY_CONTRACT_DRAFT.md`](research/R2.2_B_CARDINALITY_INTEGRITY_CONTRACT_DRAFT.md)
-- [`research/R2.2_B_RELATION_MATRIX_DRAFT.json`](research/R2.2_B_RELATION_MATRIX_DRAFT.json)
-- [`research/R2.2_B_ISSUES.md`](research/R2.2_B_ISSUES.md)
+**RC1**
+- [`research/R2.2_CARDINALITY_INTEGRITY_CONTRACT_RC1.md`](research/R2.2_CARDINALITY_INTEGRITY_CONTRACT_RC1.md)
+- [`research/R2.2_B_RELATION_MATRIX_RC1.json`](research/R2.2_B_RELATION_MATRIX_RC1.json)
+
+**REVIEW**
+- [`research/R2.2_B_REVIEW_GATE_REPORT.md`](research/R2.2_B_REVIEW_GATE_REPORT.md)
+- [`research/R2.2_B_ISSUES_REVIEWED.md`](research/R2.2_B_ISSUES_REVIEWED.md)
 
 ---
 
 ## 3. CURRENT GATE
 
-### Exit criterion R2.2-B
+### Exit criterion R2.2
 
-Dla każdej z 27 relacji musi być jednoznaczne:
+- [x] R2.2-A Relation Inventory zamrożone;
+- [x] 27 relacji weszło do R2.2-B;
+- [x] allowed ustalone;
+- [x] required / structural minimum ustalone;
+- [x] min/max cardinality ustalone;
+- [x] reference owner ustalony;
+- [x] referential integrity ustalona;
+- [x] orphan/delete boundary ustalona;
+- [x] sharing/cycle rule ustalone tam, gdzie dotyczy;
+- [x] schema enforcement sklasyfikowane;
+- [x] B01–B04 rozstrzygnięte;
+- [x] Review + RC1 przygotowane;
+- [x] baseline pozostał niezmieniony;
+- [ ] formalna decyzja `APPROVE & FREEZE R2.2`.
 
-- [ ] allowed;
-- [ ] required / structural minimum;
-- [ ] min cardinality;
-- [ ] max cardinality;
-- [ ] reference owner;
-- [ ] referential integrity;
-- [ ] orphan rule;
-- [ ] sharing rule;
-- [ ] cycle/self-loop rule, gdzie dotyczy;
-- [ ] delete/archive boundary;
-- [ ] schema enforcement status;
-- [ ] zgodność z seedem i ścieżką aplikacji;
-- [ ] rozwiązane blokery `B01–B04`;
-- [ ] Review + RC1 przygotowane bez zmiany baseline'u.
-
-**GATE STATUS:** `OPEN / DRAFT_FOR_REVIEW`
+**GATE STATUS:** `READY_FOR_SIGNOFF`
 
 ---
 
@@ -86,11 +94,11 @@ Dla każdej z 27 relacji musi być jednoznaczne:
 - R2.2-A: [`research/R2.2_A_RELATION_INVENTORY_FROZEN.md`](research/R2.2_A_RELATION_INVENTORY_FROZEN.md)
 - R2.2-A gate: [`research/R2.2_A_GATE_SIGNOFF.json`](research/R2.2_A_GATE_SIGNOFF.json)
 
-### REFERENCE — baseline evidence
+### CURRENT — reviewed RC1
 
-- JSON Schema v0.5.1
-- seed v0.5.1
-- frozen application behavior v0.5.1
+- [`research/R2.2_CARDINALITY_INTEGRITY_CONTRACT_RC1.md`](research/R2.2_CARDINALITY_INTEGRITY_CONTRACT_RC1.md)
+- [`research/R2.2_B_RELATION_MATRIX_RC1.json`](research/R2.2_B_RELATION_MATRIX_RC1.json)
+- [`research/R2.2_B_REVIEW_GATE_REPORT.md`](research/R2.2_B_REVIEW_GATE_REPORT.md)
 
 ---
 
@@ -98,40 +106,35 @@ Dla każdej z 27 relacji musi być jednoznaczne:
 
 ### DO NOW
 
-- pracować wyłącznie na 27 relacjach zamrożonych w R2.2-A;
-- rozstrzygać kardynalności, reference ownership i integralność;
-- odróżniać `required field` od `non-empty collection`;
-- rozwiązać `B01–B04`;
-- oznaczać, czego schema nie egzekwuje;
-- przygotować R2.2-B do Review i RC1.
+- podjąć wyłącznie decyzję `APPROVE & FREEZE R2.2` albo `RETURN FOR REVISION R2.2`;
+- w razie PASS utworzyć frozen contract, gate evidence, hash i zaktualizować PROJECT CONTROL.
 
 ### DO NOT DO NOW
 
-- nie zmieniać katalogu 30 relacji R2.2-A bez formalnego RETURN;
-- nie rozstrzygać semantycznych minimów provenance — owner `R2.5`;
-- nie projektować epistemic status — `R2.3`;
-- nie projektować confidence — `R2.4`;
-- nie definiować pełnego lifecycle/archive — `R2.6`;
-- nie naprawiać JSON Schema — `R2.7`;
-- nie przechodzić do R3, eksperymentu, AI ani Product;
-- nie zmieniać baseline'u v0.5.1.
+- nie rozpoczynać R2.3 przed PASS R2.2;
+- nie otwierać R2.5 provenance, R2.4 confidence, R2.6 lifecycle ani R2.7 schema repair;
+- nie zmieniać frozen R2.2-A;
+- nie zmieniać baseline'u v0.5.1;
+- nie przechodzić do R3, eksperymentu, AI ani Product.
 
 ---
 
 ## 6. OPEN ISSUES
 
-| Issue | Owner | Status | Blocking current? |
-|---|---|---|---|
-| `B01 Case.sourceIds`: exact set czy nadzbiór źródeł Episode | R2.2-B | `OPEN` | **YES** |
-| `B02 Relation self-loop`: globalny zakaz czy zależny od typu | R2.2-B | `OPEN` | **YES** |
-| `B03 ID uniqueness`: globalna czy case-local | R2.2-B | `OPEN` | **YES** |
-| `B04 Action↔Result`: potwierdzić source of truth / reverse index | R2.2-B | `OPEN` | **YES** |
-| Unit→Fragment semantic minimum | R2.5 | `DEFERRED` | NO |
-| Hypothesis support/challenge semantic minimum | R2.5 | `DEFERRED` | NO |
-| Fragment context target semantics | R2.5 + R2.7 | `DEFERRED` | NO |
-| lifecycle delete/archive + Result→ModelVersion trigger | R2.6 | `DEFERRED` | NO |
-| ModelVersion `$defs` gap | R2.7 | `DEFERRED` | NO |
-| `confidence=confirmed` | R2.4 | `DEFERRED` | NO |
+### Blocking current
+
+**NONE**
+
+### Deferred
+
+| Issue | Owner | Status |
+|---|---|---|
+| Unit→Fragment semantic minimum | R2.5 | `DEFERRED` |
+| Hypothesis support/challenge semantic minimum | R2.5 | `DEFERRED` |
+| Fragment context target semantics | R2.5 + R2.7 | `DEFERRED` |
+| lifecycle delete/archive + Result→ModelVersion trigger | R2.6 | `DEFERRED` |
+| ModelVersion `$defs` gap | R2.7 | `DEFERRED` |
+| `confidence=confirmed` | R2.4 | `DEFERRED` |
 
 ---
 
@@ -144,27 +147,22 @@ Dla każdej z 27 relacji musi być jednoznaczne:
 | R2.1 | `Case=container`; `Segment≠Fragment`; `Unit(type=hipoteza)≠Hypothesis`; ModelVersion = ontology YES / schema gap | [`R2.1_GATE_SIGNOFF.json`](research/R2.1_GATE_SIGNOFF.json) |
 | R2.2-A | 30 kandydatów sklasyfikowanych; 27 do R2.2-B; `Relation=UNIT_ONLY`; context IDs deferred; `Action.caseId` implementation-only | [`R2.2_A_GATE_SIGNOFF.json`](research/R2.2_A_GATE_SIGNOFF.json) |
 
-**Frozen decision nie może zostać zmieniona po cichu. Konflikt wymaga formalnego RETURN.**
+R2.2-B decisions są **reviewed, ale nie frozen do czasu decyzji całego R2.2**.
 
 ---
 
 ## 8. NEXT TRANSITION
 
-### IF R2.2-B REVIEW PASS
-
-`R2.2-B → READY_FOR_SIGNOFF`  
-`R2.2 → READY_FOR_SIGNOFF`  
-formalna decyzja: `APPROVE & FREEZE R2.2` albo `RETURN FOR REVISION R2.2`
-
 ### IF APPROVE & FREEZE R2.2
 
 `R2.2 → CLOSED / FROZEN`  
 `R2.3 → UNLOCKED / CURRENT`  
-`PROJECT CONTROL.currentOperation → R2.3`
+`PROJECT CONTROL.currentOperation → R2.3 — Epistemic Status Contract`
 
-### IF R2.2-B REVIEW FAIL
+### IF RETURN FOR REVISION R2.2
 
 `R2.2-B → IN_PROGRESS`  
+`R2.2 → OPEN`  
 `R2.3 → LOCKED`
 
 ---
@@ -172,7 +170,7 @@ formalna decyzja: `APPROVE & FREEZE R2.2` albo `RETURN FOR REVISION R2.2`
 ## CONTROL INTEGRITY
 
 1. `CLOSED / FROZEN` wymaga artefaktu bramki/evidence.
-2. PROJECT CONTROL wskazuje kanoniczne frozen artifacts oraz aktywne artefakty CURRENT OPERATION.
+2. PROJECT CONTROL wskazuje kanoniczne frozen artifacts oraz reviewed RC1 bieżącej bramki.
 3. Po każdej decyzji bramki PROJECT CONTROL jest aktualizowany natychmiast.
 4. Stare roadmapy, README, raporty i rozmowy nie mogą nadpisywać `STATE_NOW`.
 5. `RETURN` wymaga `FROM`, `TO`, `REASON`, `IMPACT`.
@@ -180,4 +178,4 @@ formalna decyzja: `APPROVE & FREEZE R2.2` albo `RETURN FOR REVISION R2.2`
 
 ---
 
-**STATE_NOW:** `R2.2-B — Cardinality & Integrity Contract · IN_PROGRESS`
+**STATE_NOW:** `R2.2 — Relations & Cardinalities Final Signoff · READY_FOR_SIGNOFF`

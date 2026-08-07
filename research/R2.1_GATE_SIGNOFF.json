@@ -1,0 +1,41 @@
+{
+  "stage": "R2.1",
+  "title": "Canonical Object Dictionary",
+  "version": "1.0",
+  "status": "CLOSED_FROZEN",
+  "decision": "APPROVE & FREEZE R2.1",
+  "approvedAt": "2026-08-07T08:16:00+02:00",
+  "approvedBy": "PROJECT_OWNER",
+  "baseline": {
+    "tag": "v0.5.1-experimental-baseline",
+    "commit": "c9f48db90506e0fc0fb9082e598ab0b3ef364d32",
+    "modified": false
+  },
+  "sourceArtifacts": {
+    "dictionaryRc1Sha256": "4f39fcf165f0716933b302deaf94c14f03a829376229f3bd0d5f3e086fa2d87e",
+    "reviewGateReportSha256": "c351e021970ab2ff2a7a3504441ba320cd8e8d9c958749373bae5a8cbbca1c00"
+  },
+  "frozenArtifact": {
+    "file": "SPP_v0.5.1_R2.1_OBJECT_DICTIONARY_FROZEN.md",
+    "sha256": "9dc8754bc92a0635d99ff21d3cbea0ce0b29ccee5bb454f7501cfc90618d15e3"
+  },
+  "criticalBoundaries": {
+    "caseIsContainerNotPipelineStep": "ACCEPTED",
+    "segmentVsFragment": "ACCEPTED",
+    "unitTypeHypothesisVsHypothesisObject": "ACCEPTED",
+    "modelVersionOntology": "ACCEPTED_WITH_SCHEMA_GAP"
+  },
+  "deferredToLaterR2": {
+    "R2.2": "relations, cardinalities, referential integrity",
+    "R2.3": "epistemic status/type/origin/status semantics",
+    "R2.4": "confidence semantics",
+    "R2.5": "provenance requirements",
+    "R2.6": "lifecycle and ModelVersion semantics",
+    "R2.7": "schema conformance"
+  },
+  "nextStage": {
+    "id": "R2.2",
+    "title": "Relations & Cardinalities",
+    "status": "UNLOCKED_NOT_STARTED"
+  }
+}

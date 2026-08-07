@@ -1,0 +1,52 @@
+{
+  "stage": "R2.2-B",
+  "version": "1.0-rc1",
+  "status": "READY_FOR_SIGNOFF",
+  "baselineModified": false,
+  "relationCount": 27,
+  "reviewDecisions": {
+    "B01": "SUPERSET_ALLOWED: episodeSourceIds(Case.episodeIds) subset of Case.sourceIds",
+    "B02": "SELF_LOOP_PROHIBITED: Relation.from != Relation.to; cycles length > 1 allowed",
+    "B03": "GLOBAL_STATE_UNIQUE canonical entity IDs",
+    "B04": "Result.actionId SOURCE_OF_TRUTH; Action.resultIds optional exact reverse index"
+  },
+  "globalRules": {
+    "requiredFieldVsMinItems": "required array field does not imply non-empty array",
+    "sameCaseIntegrity": true,
+    "missingTarget": "INVALID_RELATION_STATE",
+    "duplicateIdsWithinReferenceList": "PROHIBITED",
+    "destructiveDeleteWhileReferenced": "PROHIBITED",
+    "archiveLifecycleOwner": "R2.6",
+    "semanticProvenanceMinimumOwner": "R2.5",
+    "schemaRepairOwner": "R2.7"
+  },
+  "relations": [
+    {"id":"I01","from":"Source","to":"Segment","cardinality":"1..N","reverse":"1","required":true,"owner":"Source.segments[]","sharing":false,"schema":"PARTIAL"},
+    {"id":"I02","from":"Episode","to":"Source","cardinality":"1","reverse":"0..N","required":true,"owner":"Episode.sourceId","sharing":true,"schema":"PARTIAL"},
+    {"id":"I03","from":"Episode","to":"Segment","cardinality":"1..N","reverse":"0..N","required":true,"owner":"Episode.segmentIds[]","sharing":true,"schema":"PARTIAL","integrity":"Segment belongs to Episode.sourceId"},
+    {"id":"I04","from":"Case","to":"Source","cardinality":"1..N","reverse":"0..N","required":true,"owner":"Case.sourceIds[]","sharing":true,"schema":"PARTIAL","integrity":"episodeSourceIds subset of sourceIds; extra Source allowed"},
+    {"id":"I05","from":"Case","to":"Episode","cardinality":"1..N","reverse":"0..N","required":true,"owner":"Case.episodeIds[]","sharing":true,"schema":"PARTIAL","integrity":"Episode.sourceId in Case.sourceIds"},
+    {"id":"I06","from":"Case","to":"Fragment","cardinality":"0..N","reverse":"1","required":false,"owner":"Case.fragments[]","sharing":false,"schema":"PARTIAL"},
+    {"id":"I07","from":"Case","to":"Unit","cardinality":"0..N","reverse":"1","required":false,"owner":"Case.units[]","sharing":false,"schema":"PARTIAL"},
+    {"id":"I08","from":"Case","to":"Relation","cardinality":"0..N","reverse":"1","required":false,"owner":"Case.relations[]","sharing":false,"schema":"PARTIAL"},
+    {"id":"I09","from":"Case","to":"Hypothesis","cardinality":"0..N","reverse":"1","required":false,"owner":"Case.hypotheses[]","sharing":false,"schema":"PARTIAL"},
+    {"id":"I10","from":"Case","to":"Model","cardinality":"0..N","reverse":"1","required":false,"owner":"Case.models[]","sharing":false,"schema":"PARTIAL"},
+    {"id":"I11","from":"Case","to":"Action","cardinality":"0..N","reverse":"1","required":false,"owner":"Case.actions[]","sharing":false,"schema":"PARTIAL","integrity":"Action.caseId not source of truth"},
+    {"id":"I12","from":"Case","to":"Result","cardinality":"0..N","reverse":"1","required":false,"owner":"Case.results[]","sharing":false,"schema":"PARTIAL"},
+    {"id":"I13","from":"Case","to":"ModelVersion-record","cardinality":"0..N","reverse":"1","required":false,"owner":"Case.versions[]","sharing":false,"schema":"SCHEMA_GAP"},
+    {"id":"I14","from":"Fragment","to":"Episode","cardinality":"1","reverse":"0..N","required":true,"owner":"Fragment.episodeId","sharing":true,"schema":"PARTIAL","integrity":"Episode in owning Case.episodeIds"},
+    {"id":"I15","from":"Fragment","to":"Segment","cardinality":"1..N","reverse":"0..N","required":true,"owner":"Fragment.segmentIds[]","sharing":true,"schema":"PARTIAL","integrity":"Segment in Fragment Episode"},
+    {"id":"I18","from":"Unit","to":"Fragment","cardinality":"0..N*","reverse":"0..N","required":false,"owner":"Unit.fragmentIds[]","sharing":true,"schema":"PARTIAL","semanticMinimumOwner":"R2.5"},
+    {"id":"I19","from":"Relation.from","to":"Unit","cardinality":"1","reverse":"0..N outgoing","required":true,"owner":"Relation.from","sharing":true,"schema":"PARTIAL","cycleRule":"SELF_LOOP_PROHIBITED; cycles length >1 allowed"},
+    {"id":"I20","from":"Relation.to","to":"Unit","cardinality":"1","reverse":"0..N incoming","required":true,"owner":"Relation.to","sharing":true,"schema":"PARTIAL","cycleRule":"SELF_LOOP_PROHIBITED; cycles length >1 allowed"},
+    {"id":"I21","from":"Hypothesis","to":"supporting Unit","cardinality":"0..N*","reverse":"0..N","required":false,"owner":"Hypothesis.support[]","sharing":true,"schema":"PARTIAL","semanticMinimumOwner":"R2.5"},
+    {"id":"I22","from":"Hypothesis","to":"challenging Unit","cardinality":"0..N","reverse":"0..N","required":false,"owner":"Hypothesis.challenge[]","sharing":true,"schema":"PARTIAL","semanticRulesOwner":"R2.5"},
+    {"id":"I23","from":"Model","to":"Hypothesis","cardinality":"0..N","reverse":"0..N","required":false,"owner":"Model.hypothesisIds[]","sharing":true,"schema":"PARTIAL"},
+    {"id":"I24","from":"Model","to":"supporting Unit","cardinality":"0..N","reverse":"0..N","required":false,"owner":"Model.supportUnits[]","sharing":true,"schema":"PARTIAL"},
+    {"id":"I25","from":"Model","to":"challenging Unit","cardinality":"0..N","reverse":"0..N","required":false,"owner":"Model.challengeUnits[]","sharing":true,"schema":"PARTIAL"},
+    {"id":"I26","from":"Action","to":"Model","cardinality":"1","reverse":"0..N","required":true,"owner":"Action.modelId","sharing":true,"schema":"PARTIAL"},
+    {"id":"I27","from":"Action","to":"Result","cardinality":"0..N","reverse":"1 via I28","required":false,"owner":"Action.resultIds[]","sharing":false,"schema":"PARTIAL","role":"OPTIONAL_REVERSE_INDEX"},
+    {"id":"I28","from":"Result","to":"Action","cardinality":"1","reverse":"0..N","required":true,"owner":"Result.actionId","sharing":false,"schema":"PARTIAL","role":"SOURCE_OF_TRUTH"},
+    {"id":"I29","from":"ModelVersion-record","to":"Model","cardinality":"1","reverse":"0..N","required":true,"owner":"entityId where entityType=model","sharing":false,"schema":"SCHEMA_GAP"}
+  ]
+}

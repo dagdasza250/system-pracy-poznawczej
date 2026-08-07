@@ -6,7 +6,9 @@
 - R1 — `CLOSED / FROZEN`
 - R2 — `OPEN`
   - R2.1 — `CLOSED / FROZEN`
-  - R2.2 — `UNLOCKED / NOT STARTED`
+  - R2.2 — `IN PROGRESS`
+    - R2.2-A Relation Inventory — `DRAFT_FOR_REVIEW`
+    - R2.2-B Cardinality & Integrity Contract — `NOT STARTED`
   - R2.3 — `LOCKED`
   - R2.4 — `LOCKED`
   - R2.5 — `LOCKED`
@@ -29,8 +31,21 @@
 
 ## Current operation
 
-The only unlocked next operation is:
+**R2.2-A — Relation Inventory Review Gate**
 
-**R2.2 — Relations & Cardinalities**
+R2.2 has formally started. The first relation inventory has been produced from the frozen v0.5.1 JSON Schema, seed and application behavior without modifying the baseline.
 
-R2.2 has not started yet. It must formalize allowed relations, obligation, minimum/maximum cardinality, reference ownership, and referential-integrity behavior without modifying the frozen v0.5.1 baseline.
+The inventory currently identifies 30 relation candidates and separates structural containment, explicit ID references, semantic `Relation(from,type,to)` edges, and implementation-only references.
+
+Before R2.2-B can start, the R2.2-A Review Gate must resolve three questions:
+
+1. whether `Relation.from/to` are Unit-only endpoints or polymorphic;
+2. the target type of `Fragment.contextBeforeIds/contextAfterIds`;
+3. whether `Action.caseId` is canonical ontology or only a redundant implementation backlink.
+
+Until these decisions are reviewed and frozen:
+
+- R2.2-A remains `DRAFT_FOR_REVIEW`;
+- R2.2-B remains `NOT STARTED`;
+- R2.3 and R3 remain `LOCKED`;
+- the frozen `v0.5.1-experimental-baseline` remains unchanged.

@@ -1,0 +1,43 @@
+{
+  "stage": "R2.2-B",
+  "version": "0.1-draft",
+  "status": "DRAFT_FOR_REVIEW",
+  "baselineModified": false,
+  "notes": {
+    "requiredArray": "required field does not imply minItems > 0",
+    "sameCaseIntegrity": true,
+    "schemaReferentialEnforcement": "PARTIAL",
+    "semanticMinimumsDeferredTo": "R2.5",
+    "lifecycleDeleteArchiveDeferredTo": "R2.6"
+  },
+  "relations": [
+    {"id":"I01","from":"Source","to":"Segment","class":"STRUCTURAL_CONTAINMENT","fromCardinality":"1..N","toCardinality":"1","owner":"Source.segments[]","sharing":"NO","schema":"PARTIAL","seed":"PASS"},
+    {"id":"I02","from":"Episode","to":"Source","class":"EXPLICIT_REFERENCE","fromCardinality":"1","toCardinality":"0..N","owner":"Episode.sourceId","sharing":"YES","schema":"PARTIAL","seed":"PASS"},
+    {"id":"I03","from":"Episode","to":"Segment","class":"EXPLICIT_REFERENCE","fromCardinality":"1..N","toCardinality":"0..N","owner":"Episode.segmentIds[]","sharing":"YES","schema":"PARTIAL","seed":"PASS","integrity":"segment belongs to Episode.sourceId"},
+    {"id":"I04","from":"Case","to":"Source","class":"EXPLICIT_REFERENCE","fromCardinality":"1..N","toCardinality":"0..N","owner":"Case.sourceIds[]","sharing":"YES","schema":"PARTIAL","seed":"PASS","review":"B01 exact set vs superset"},
+    {"id":"I05","from":"Case","to":"Episode","class":"EXPLICIT_REFERENCE","fromCardinality":"1..N","toCardinality":"0..N","owner":"Case.episodeIds[]","sharing":"YES","schema":"PARTIAL","seed":"PASS","integrity":"Episode.sourceId in Case.sourceIds"},
+    {"id":"I06","from":"Case","to":"Fragment","class":"STRUCTURAL_CONTAINMENT","fromCardinality":"0..N","toCardinality":"1","owner":"Case.fragments[]","sharing":"NO","schema":"PARTIAL","seed":"PASS"},
+    {"id":"I07","from":"Case","to":"Unit","class":"STRUCTURAL_CONTAINMENT","fromCardinality":"0..N","toCardinality":"1","owner":"Case.units[]","sharing":"NO","schema":"PARTIAL","seed":"PASS"},
+    {"id":"I08","from":"Case","to":"Relation","class":"STRUCTURAL_CONTAINMENT","fromCardinality":"0..N","toCardinality":"1","owner":"Case.relations[]","sharing":"NO","schema":"PARTIAL","seed":"PASS"},
+    {"id":"I09","from":"Case","to":"Hypothesis","class":"STRUCTURAL_CONTAINMENT","fromCardinality":"0..N","toCardinality":"1","owner":"Case.hypotheses[]","sharing":"NO","schema":"PARTIAL","seed":"PASS"},
+    {"id":"I10","from":"Case","to":"Model","class":"STRUCTURAL_CONTAINMENT","fromCardinality":"0..N","toCardinality":"1","owner":"Case.models[]","sharing":"NO","schema":"PARTIAL","seed":"PASS"},
+    {"id":"I11","from":"Case","to":"Action","class":"STRUCTURAL_CONTAINMENT","fromCardinality":"0..N","toCardinality":"1","owner":"Case.actions[]","sharing":"NO","schema":"PARTIAL","seed":"PASS","integrity":"Action.caseId is not source of truth"},
+    {"id":"I12","from":"Case","to":"Result","class":"STRUCTURAL_CONTAINMENT","fromCardinality":"0..N","toCardinality":"1","owner":"Case.results[]","sharing":"NO","schema":"PARTIAL","seed":"NOT_EXERCISED"},
+    {"id":"I13","from":"Case","to":"ModelVersion-record","class":"STRUCTURAL_CONTAINMENT+SCHEMA_GAP","fromCardinality":"0..N","toCardinality":"1","owner":"Case.versions[]","sharing":"NO","schema":"SCHEMA_GAP","seed":"PASS"},
+    {"id":"I14","from":"Fragment","to":"Episode","class":"EXPLICIT_REFERENCE","fromCardinality":"1","toCardinality":"0..N","owner":"Fragment.episodeId","sharing":"YES","schema":"PARTIAL","seed":"PASS"},
+    {"id":"I15","from":"Fragment","to":"Segment","class":"EXPLICIT_REFERENCE","fromCardinality":"1..N","toCardinality":"0..N","owner":"Fragment.segmentIds[]","sharing":"YES","schema":"PARTIAL","seed":"PASS","integrity":"segment in Fragment.episodeId.segmentIds"},
+    {"id":"I18","from":"Unit","to":"Fragment","class":"EXPLICIT_REFERENCE","fromCardinality":"0..N*","toCardinality":"0..N","owner":"Unit.fragmentIds[]","sharing":"YES","schema":"PARTIAL","seed":"PASS","semanticMinimum":"R2.5"},
+    {"id":"I19","from":"Relation.from","to":"Unit","class":"SEMANTIC_EDGE/UNIT_ONLY","fromCardinality":"1","toCardinality":"0..N outgoing","owner":"Relation.from","sharing":"YES","schema":"PARTIAL","seed":"PASS","review":"B02 self-loop"},
+    {"id":"I20","from":"Relation.to","to":"Unit","class":"SEMANTIC_EDGE/UNIT_ONLY","fromCardinality":"1","toCardinality":"0..N incoming","owner":"Relation.to","sharing":"YES","schema":"PARTIAL","seed":"PASS","review":"B02 self-loop"},
+    {"id":"I21","from":"Hypothesis","to":"supporting Unit","class":"EXPLICIT_REFERENCE/TARGET_CLARIFIED","fromCardinality":"0..N*","toCardinality":"0..N","owner":"Hypothesis.support[]","sharing":"YES","schema":"PARTIAL","seed":"PASS","semanticMinimum":"R2.5"},
+    {"id":"I22","from":"Hypothesis","to":"challenging Unit","class":"EXPLICIT_REFERENCE/TARGET_CLARIFIED","fromCardinality":"0..N","toCardinality":"0..N","owner":"Hypothesis.challenge[]","sharing":"YES","schema":"PARTIAL","seed":"PASS","semanticRules":"R2.5"},
+    {"id":"I23","from":"Model","to":"Hypothesis","class":"EXPLICIT_REFERENCE","fromCardinality":"0..N","toCardinality":"0..N","owner":"Model.hypothesisIds[]","sharing":"YES","schema":"PARTIAL","seed":"PASS"},
+    {"id":"I24","from":"Model","to":"supporting Unit","class":"EXPLICIT_REFERENCE","fromCardinality":"0..N","toCardinality":"0..N","owner":"Model.supportUnits[]","sharing":"YES","schema":"PARTIAL","seed":"PASS"},
+    {"id":"I25","from":"Model","to":"challenging Unit","class":"EXPLICIT_REFERENCE","fromCardinality":"0..N","toCardinality":"0..N","owner":"Model.challengeUnits[]","sharing":"YES","schema":"PARTIAL","seed":"PASS"},
+    {"id":"I26","from":"Action","to":"Model","class":"EXPLICIT_REFERENCE","fromCardinality":"1","toCardinality":"0..N","owner":"Action.modelId","sharing":"YES","schema":"PARTIAL","seed":"PASS"},
+    {"id":"I27","from":"Action","to":"Result","class":"EXPLICIT_REFERENCE/REVERSE_INDEX","fromCardinality":"0..N","toCardinality":"1 via I28","owner":"Action.resultIds[]","sharing":"NO","schema":"PARTIAL","seed":"NOT_EXERCISED","review":"B04 source of truth"},
+    {"id":"I28","from":"Result","to":"Action","class":"EXPLICIT_REFERENCE/SOURCE_OF_TRUTH_CANDIDATE","fromCardinality":"1","toCardinality":"0..N","owner":"Result.actionId","sharing":"NO","schema":"PARTIAL","seed":"NOT_EXERCISED","review":"B04 source of truth"},
+    {"id":"I29","from":"ModelVersion-record","to":"Model","class":"CANONICAL_REFERENCE+SCHEMA_GAP","fromCardinality":"1","toCardinality":"0..N","owner":"entityId where entityType=model","sharing":"NO","schema":"SCHEMA_GAP","seed":"PASS"}
+  ],
+  "blockingReviewIssues": ["B01","B02","B03","B04"]
+}

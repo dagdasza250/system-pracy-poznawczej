@@ -2,28 +2,40 @@
 
 Kanoniczne repozytorium programu SPP.
 
+## Aktualny stan projektu
+
+**Nie jest utrzymywany w README.**
+
+Jedynym kanonicznym źródłem aktualnego stanu operacyjnego programu jest:
+
+➡️ **[SPP PROJECT CONTROL v1](PROJECT_CONTROL.md)**
+
+To tam sprawdzamy:
+- gdzie projekt znajduje się teraz;
+- jaka operacja jest CURRENT;
+- co jest FROZEN / LOCKED;
+- jaki artefakt tworzymy;
+- jakie jest kryterium wyjścia;
+- co zostanie odblokowane po PASS.
+
+README nie może konkurować z PROJECT CONTROL przez przechowywanie własnego statusu etapu.
+
 ## Program
 
 **Research → decyzja wartości → Product → badanie AI → beta i replikacja → produkcja**
 
-Aktualny etap: **R0.5 — niezależny test reprodukcji i podpisanie bramki R0**.
-
-Do zamknięcia R0:
-- baseline v0.5.1 jest zamrożony;
-- artefakty techniczne R0.1–R0.4 są ukończone;
-- Companion Kit 1.0.1 jest gotowy;
-- oczekiwany jest niezależny test `PASS_INDEPENDENT`.
-
-Do tego czasu **R1, R2–R6, Product i AI pozostają zablokowane**.
-
 ## Struktura
 
-- `baseline/v0.5.1/` — zamrożony instrument eksperymentalny i dokumentacja release'u;
-- `r0-companion/1.0.1/` — narzędzie niezależnej reprodukcji;
-- `program/` — kanoniczna mapa etapów i status bramek;
+- `PROJECT_CONTROL.md` — **kanoniczny pulpit stanu operacyjnego**;
+- `baseline/` — zamrożone instrumenty eksperymentalne i dokumentacja release'ów;
+- `research/` — kontrakty, audyty, bramki i artefakty fazy Research;
+- `r0-companion/` — narzędzia niezależnej reprodukcji baseline'u;
+- `program/` — mapa programu i materiały planistyczne;
 - `docs/` — dokumentacja nadrzędna;
-- GitHub Issues — bramki i jawne blokery programu.
+- GitHub history — historia zmian i decyzji.
 
 ## Zasada niezmienności
 
-Baseline `v0.5.1-experimental-baseline` nie może być po cichu zmieniany. Każda poprawka wymaga nowego commita i jednoznacznie nowej wersji/release'u oraz ponownej kontroli integralności i reprodukcji.
+Baseline `v0.5.1-experimental-baseline` nie może być po cichu zmieniany. Każda poprawka wymaga jawnego procesu wersjonowania i kontroli integralności.
+
+Zamrożone artefakty są źródłem prawdy merytorycznej. `PROJECT_CONTROL.md` jest źródłem prawdy o **STATE_NOW**.
